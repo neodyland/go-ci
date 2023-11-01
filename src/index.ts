@@ -59,7 +59,7 @@ async function doInstallGo() {
     const doInstall = trygetBooleanInput("install-go");
     if (doInstall) {
         await $("wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz");
-        await $("tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz");
+        await $("sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz");
         await $("export PATH=$PATH:/usr/local/go/bin");
         await $("go version");
     }
