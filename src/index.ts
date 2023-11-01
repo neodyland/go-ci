@@ -89,16 +89,24 @@ async function main() {
             GOPATH: "/go",
         };
     }
-    await $("sudo /usr/local/go/bin/go build -o ./target/aarch64/bin", {
-        ...env,
-        GOOS: "linux",
-        GOARCH: "arm64",
-    });
-    await $("sudo /usr/local/go/bin/go build -o ./target/x86-64/bin", {
-        ...env,
-        GOOS: "linux",
-        GOARCH: "amd64",
-    });
+    await $(
+        'sudo sh -c "GOOS=linux GOARCH=arm64 /usr/local/go/bin/go build -o ./target/aarch64/bin"',
+        {
+            ...env,
+            GOOS: "linux",
+            GOARCH: "arm64",
+        },
+        true,
+    );
+    await $(
+        'sudo sh -c "GOOS=linux GOARCH=amd64 /usr/local/go/bin/go build -o ./target/x86-64/bin"',
+        {
+            ...env,
+            GOOS: "linux",
+            GOARCH: "amd64",
+        },
+        true,
+    );
     await rmRF("./.out");
     await mkdirP("./.out");
     await mkdirP("./.out/aarch64");
