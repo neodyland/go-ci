@@ -81,10 +81,6 @@ async function main() {
         );
     }
     await doInstallGo();
-    await $("sudo apt-get update");
-    await $(
-        "sudo apt-get install gcc-aarch64-linux-gnu gcc-x86-64-linux-gnu -y",
-    );
     let env: Record<string, string> = {};
     if (willCache) {
         env = {
@@ -107,16 +103,8 @@ async function main() {
     await mkdirP("./.out");
     await mkdirP("./.out/aarch64");
     await mkdirP("./.out/x86-64");
-    await $(
-        `aarch64-linux-gnu-strip target/aarch64 -o ./.out/aarch64/bin`,
-        undefined,
-        true,
-    );
-    await $(
-        `x86_64-linux-gnu-strip target/x86-64 -o ./.out/x86-64/bin`,
-        undefined,
-        true,
-    );
+    await $(`cp target/aarch64/bin -o ./.out/aarch64/bin`, undefined, true);
+    await $(`cp target/x86-64/bin -o ./.out/x86-64/bin`, undefined, true);
     if (willCache) {
         const key = `${type()}-CrossBuild-${await hashFiles()}`;
         const _cacheId = await saveCache(paths.slice(), key);
