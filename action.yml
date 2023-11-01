@@ -1,0 +1,19 @@
+name: "go-ci"
+description: "build x86_64, aarch64 linux go binary fast"
+inputs:
+    install-go:
+        description: "Will install go for you"
+        required: false
+        type: boolean
+        default: true
+    cache:
+        description: "Cache go for you"
+        required: false
+        type: boolean
+        default: true
+runs:
+    using: "node20"
+    main: dist/index.js
+outputs:
+    file:
+        description: "Saved path"
