@@ -93,12 +93,12 @@ async function main() {
             GOPATH: "/go",
         };
     }
-    await $("/usr/local/go/bin/go build -o target/aarch64", {
+    await $("sudo /usr/local/go/bin/go build -o ./target/aarch64", {
         ...env,
         GOOS: "linux",
         GOARCH: "arm64",
     });
-    await $("/usr/local/go/bin/go build -o target/x86-64", {
+    await $("sudo /usr/local/go/bin/go build -o ./target/x86-64", {
         ...env,
         GOOS: "linux",
         GOARCH: "amd64",
@@ -108,12 +108,12 @@ async function main() {
     await mkdirP("./.out/aarch64");
     await mkdirP("./.out/x86-64");
     await $(
-        `aarch64-linux-gnu-strip target/aarch64 -o ./.out/aarch64/bin`,
+        `aarch64-linux-gnu-strip ./target/aarch64 -o ./.out/aarch64/bin`,
         undefined,
         true,
     );
     await $(
-        `x86_64-linux-gnu-strip target/x86-64 -o ./.out/x86-64/bin`,
+        `x86_64-linux-gnu-strip ./target/x86-64 -o ./.out/x86-64/bin`,
         undefined,
         true,
     );
