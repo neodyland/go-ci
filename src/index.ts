@@ -60,8 +60,7 @@ async function doInstallGo() {
     if (doInstall) {
         await $("wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz");
         await $("sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz");
-        await $("export PATH=$PATH:/usr/local/go/bin");
-        await $("go version");
+        await $("/usr/local/go/bin/go version");
     }
 }
 
@@ -93,12 +92,12 @@ async function main() {
             CARGO_INCREMENTAL: "1",
         };
     }
-    await $("go build -o target/aarch64", {
+    await $("/usr/local/go/bin/go build -o target/aarch64", {
         ...env,
         GOOS: "linux",
         GOARCH: "arm64",
     });
-    await $("go build -o target/x86-64", {
+    await $("/usr/local/go/bin/go build -o target/x86-64", {
         ...env,
         GOOS: "linux",
         GOARCH: "amd64",
