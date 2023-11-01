@@ -90,6 +90,7 @@ async function main() {
         env = {
             ...env,
             CARGO_INCREMENTAL: "1",
+            GOPATH: "/go",
         };
     }
     await $("/usr/local/go/bin/go build -o target/aarch64", {
