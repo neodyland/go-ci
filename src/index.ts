@@ -89,12 +89,12 @@ async function main() {
             GOPATH: "/go",
         };
     }
-    await $("sudo /usr/local/go/bin/go build -o ./target/aarch64/bin", {
+    await $("sudo /usr/local/go/bin/go build ./target/aarch64/bin", {
         ...env,
         GOOS: "linux",
         GOARCH: "arm64",
     });
-    await $("sudo /usr/local/go/bin/go build -o ./target/x86-64/bin", {
+    await $("sudo /usr/local/go/bin/go build ./target/x86-64/bin", {
         ...env,
         GOOS: "linux",
         GOARCH: "amd64",
